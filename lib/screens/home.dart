@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -19,6 +20,41 @@ class Home extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "0",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Gap(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Increase",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Gap(20),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Decrease",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
