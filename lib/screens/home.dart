@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:counter_bloc/screens/data/counter_cubit.dart';
+import 'package:counter_bloc/screens/data/counter_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -31,31 +34,48 @@ class Home extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "0",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
+              BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  log("child");
+                  return Text(
+                    state.count.toString(),
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
               Gap(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Increase",
-                      style: TextStyle(fontSize: 20),
-                    ),
+                  BlocBuilder<CounterCubit, CounterState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<CounterCubit>().increment();
+                        },
+                        child: Text(
+                          "Increase",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      );
+                    },
                   ),
                   Gap(20),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Decrease",
-                      style: TextStyle(fontSize: 20),
-                    ),
+                  BlocBuilder<CounterCubit, CounterState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<CounterCubit>().decrement();
+                        },
+                        child: Text(
+                          "decrease",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )
