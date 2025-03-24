@@ -2,6 +2,8 @@
 
 import 'dart:developer';
 
+import 'package:counter_bloc/screens/bloc/counter_bloc.dart';
+import 'package:counter_bloc/screens/bloc/counter_event.dart';
 import 'package:counter_bloc/screens/data/counter_cubit.dart';
 import 'package:counter_bloc/screens/data/counter_state.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +31,12 @@ class Home extends StatelessWidget {
       body: Center(
         child: BlocProvider(
           create: (context) {
-            return CounterCubit();
+            return CounterBloc();
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BlocBuilder<CounterCubit, CounterState>(
+              BlocBuilder<CounterBloc, CounterState>(
                 builder: (context, state) {
                   log("child");
                   return Text(
@@ -50,11 +52,11 @@ class Home extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BlocBuilder<CounterCubit, CounterState>(
+                  BlocBuilder<CounterBloc, CounterState>(
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                          context.read<CounterCubit>().increment();
+                          context.read<CounterBloc>().add(IncrementEvent());
                         },
                         child: Text(
                           "Increase",
@@ -64,11 +66,11 @@ class Home extends StatelessWidget {
                     },
                   ),
                   Gap(20),
-                  BlocBuilder<CounterCubit, CounterState>(
+                  BlocBuilder<CounterBloc, CounterState>(
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                          context.read<CounterCubit>().decrement();
+                          context.read<CounterBloc>().add(DecrementEvent());
                         },
                         child: Text(
                           "decrease",
